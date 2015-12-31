@@ -16,25 +16,25 @@ def tempToCelsius(kelvin):
 
 def sortWeatherInfo(json):#must test cloudiness, snow, rain etc. before implementing
     weather = {}
-    weather['sunset'] = getValueFromJson(json['sys'], 'sunset')
-    weather['sunrise'] = getValueFromJson(json['sys'], 'sunrise')
+    weather['sunset'] = msToDate(getValueFromJson(json['sys'], 'sunset'))
+    weather['sunrise'] = msToDate(getValueFromJson(json['sys'], 'sunrise'))
     weather['country'] = getValueFromJson(json['sys'], 'country')
     weather['windDeg'] = getValueFromJson(json['wind'], 'deg')
     weather['windSpeed'] = getValueFromJson(json['wind'], 'speed')
     weather['weatherDesc'] = getValueFromJson(json['weather'][0], 'description')
     weather['weatherMain'] = getValueFromJson(json['weather'][0], 'main')
     weather['humidity'] = getValueFromJson(json['main'], 'humidity')
-    weather['temp'] = getValueFromJson(json['main'], 'temp')
+    weather['temp'] = tempToCelsius(getValueFromJson(json['main'], 'temp'))
     weather['cityName'] = getValueFromJson(json, 'name')
-    weather['time'] = getValueFromJson(json, 'dt')
+    weather['time'] = msToDate(getValueFromJson(json, 'dt'))
+    return weather
 
 def getValueFromJson(json, key):
     return json[key]
 
 
 
-
-getWeather('tartu')
+print(getWeather('edinburg'))
 
     
     
